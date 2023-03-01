@@ -1,5 +1,5 @@
 name: Release
-on: 
+on:
   workflow_dispatch:
     inputs:
       ReleaseHeader:
@@ -37,11 +37,11 @@ jobs:
       - name: Update PowerShell Metadata
         uses: natescherer/update-powershell-metadata-action@v2
         with:
-          path: src
+          path: SecretManagement.ExtensionTemplate
           version: ${{ steps.gitversion.outputs.SemVer }}
-          copyright: (c) YYYY Nate Scherer. All rights reserved.
+          copyright: (c) YYYY Sascha Spiekermann. All rights reserved.
           releaseNotes: ${{ steps.changelog.outputs.releasenotes }}
-          functionsToExportPath: src\public
+          # functionsToExportPath: src\public
           description: ${{ steps.metadata.outputs.description }}
       - name: Generate Markdown Help Files
         run: |
