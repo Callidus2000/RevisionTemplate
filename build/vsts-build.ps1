@@ -10,6 +10,7 @@ param (
 	$WorkingDirectory,
 
 	$Repository = 'PSGallery',
+	$Version,
 
 	[switch]
 	$LocalRepo,
@@ -34,7 +35,8 @@ if (-not $WorkingDirectory) { $WorkingDirectory = Split-Path $PSScriptRoot }
 #endregion Handle Working Directory Defaults
 
 # Prepare publish folder
-Write-PSFMessage -Level Important -Message "Compiling the template"
+Write-PSFMessage -Level Important -Message "Compiling the template Version $Version"
+return
 & $PSScriptRoot\compile-Template.ps1
 Write-PSFMessage -Level Important -Message "Creating and populating publishing directory"
 $publishDir = New-Item -Path $WorkingDirectory -Name publish -ItemType Directory -Force
