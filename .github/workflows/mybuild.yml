@@ -32,8 +32,18 @@ jobs:
       shell: pwsh
       run: |
           Get-Module -Name PSFramework, PSModuleDevelopment -ListAvailable | Select Path
-    - name: Setup tmate session
-      uses: mxschmitt/action-tmate@v3
+    - name: Query needed modules
+      id: getReqModules
+      shell: pwsh
+      run: |
+          (Import-PowerShellDataFile ./SecretManagement.ExtensionTemplate/SecretManagement.ExtensionTemplate.psd1).RequiredModules.modulename -join ','
+    - name: Install and cache PowerShell modules
+      id: psmodulecache
+      uses: potatoqualitee/psmodulecache@v5.2
+      with:
+        modules-to-cache: ${{ steps.getReqModules.outputs }}
+    # - name: Setup tmate session
+    #   uses: mxschmitt/action-tmate@v3
     # - name: Build
     #   run: .\build\vsts-build.ps1 -ApiKey $env:APIKEY -Version ${{ steps.gitversion.outputs.SemVer }}
     #   shell: pwsh
