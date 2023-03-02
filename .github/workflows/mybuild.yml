@@ -23,25 +23,32 @@ jobs:
     - name: Determine Version
       id: gitversion
       uses: gittools/actions/gitversion/execute@v0.9.15
-    - name: Query needed modules
-      id: getReqModules
-      shell: pwsh
-      run: |
-          (Import-PowerShellDataFile ./SecretManagement.ExtensionTemplate/SecretManagement.ExtensionTemplate.psd1).RequiredModules.modulename -join ','
-    - name: Install and cache PowerShell modules
-      id: psmodulecache
-      uses: potatoqualitee/psmodulecache@v5.2
-      with:
-        modules-to-cache: ${{ steps.getReqModules.outputs }}
+    # - name: Query needed modules
+    #   id: getReqModules
+    #   shell: pwsh
+    #   run: |
+    #       (Import-PowerShellDataFile ./SecretManagement.ExtensionTemplate/SecretManagement.ExtensionTemplate.psd1).RequiredModules.modulename -join ','
     # - name: Install and cache PowerShell modules
     #   id: psmodulecache
     #   uses: potatoqualitee/psmodulecache@v5.2
     #   with:
-    #     modules-to-cache: PSFramework, PSModuleDevelopment
+    #     modules-to-cache: ${{ steps.getReqModules.outputs }}
+    - name: Install and cache PowerShell modules
+      id: psmodulecache
+      uses: potatoqualitee/psmodulecache@v5.2
+      with:
+        modules-to-cache: PSFramework, PSModuleDevelopment
+    - name: Update Changelog
+      id: changelog
+      uses: natescherer/changelog-management-action@v1
+      with:
+        mode: release
+        releaseVersion: ${{ steps.gitversion.outputs.SemVer }}
     - name: Show that the Action works
       shell: pwsh
       run: |
-          Get-Module -Name PSFramework, PSModuleDevelopment -ListAvailable | Select Path
+          Get-Content .\CHANGELOG.md
+          #Get-Module -Name PSFramework, PSModuleDevelopment -ListAvailable | Select Path
     # - name: Setup tmate session
     #   uses: mxschmitt/action-tmate@v3
     # - name: Build
