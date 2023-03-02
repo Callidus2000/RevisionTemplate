@@ -32,6 +32,8 @@ jobs:
       shell: pwsh
       run: |
           Get-Module -Name PSFramework, PSModuleDevelopment -ListAvailable | Select Path
+    - name: Setup tmate session
+      uses: mxschmitt/action-tmate@v3
     # - name: Build
     #   run: .\build\vsts-build.ps1 -ApiKey $env:APIKEY -Version ${{ steps.gitversion.outputs.SemVer }}
     #   shell: pwsh
