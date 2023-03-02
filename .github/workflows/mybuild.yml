@@ -50,7 +50,7 @@ jobs:
     - name: Update PowerShell Metadata
       uses: natescherer/update-powershell-metadata-action@v2
       with:
-        path: $MODULENAME
+        path: $($env:MODULENAME)
         version: ${{ steps.gitversion.outputs.SemVer }}
         copyright: (c) YYYY Sascha Spiekermann. All rights reserved.
         releaseNotes: ${{ steps.changelog.outputs.releasenotes }}
