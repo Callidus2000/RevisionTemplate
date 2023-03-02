@@ -29,7 +29,7 @@ jobs:
       id: getReqModules
       shell: pwsh
       run: |
-          "RequiredModules=$((Import-PowerShellDataFile "./$(env:MODULENAME)/$(env:MODULENAME).psd1").RequiredModules.modulename -join ',')" >> $env:GITHUB_OUTPUT
+          "RequiredModules=$((Import-PowerShellDataFile "./$($env:MODULENAME)/$($env:MODULENAME).psd1").RequiredModules.modulename -join ',')" >> $env:GITHUB_OUTPUT
           # (Import-PowerShellDataFile ./SecretManagement.ExtensionTemplate/SecretManagement.ExtensionTemplate.psd1).RequiredModules.modulename -join ','
     - name: Install and cache PowerShell modules
       id: psmodulecache
