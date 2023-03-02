@@ -5,7 +5,7 @@
   workflow_dispatch:
 
 jobs:
-  build:
+  myBuild:
 
     runs-on: ubuntu-latest
     steps:
@@ -27,12 +27,13 @@ jobs:
     #   id: getReqModules
     #   shell: pwsh
     #   run: |
+    #       "RequiredModules=$((Import-PowerShellDataFile ./SecretManagement.ExtensionTemplate/SecretManagement.ExtensionTemplate.psd1).RequiredModules.modulename -join ',')" >> $env:GITHUB_OUTPUT
     #       (Import-PowerShellDataFile ./SecretManagement.ExtensionTemplate/SecretManagement.ExtensionTemplate.psd1).RequiredModules.modulename -join ','
     # - name: Install and cache PowerShell modules
     #   id: psmodulecache
     #   uses: potatoqualitee/psmodulecache@v5.2
     #   with:
-    #     modules-to-cache: ${{ steps.getReqModules.outputs }}
+    #     modules-to-cache: ${{ steps.getReqModules.outputs.RequiredModules }}
     - name: Install and cache PowerShell modules
       id: psmodulecache
       uses: potatoqualitee/psmodulecache@v5.2
