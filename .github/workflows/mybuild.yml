@@ -67,9 +67,9 @@ jobs:
         }
         Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
         Install-Module -Name platyPS
-        Get-Module -Name $env:BARE_REPOSITORY -All | Remove-Module -Force -ErrorAction Ignore
-        Import-Module -Name $env:MODULE_PATH -Force -ErrorAction Stop
-        New-MarkdownHelp -Module $env:BARE_REPOSITORY -OutputFolder $DocsPath | Out-Null
+        Get-Module -Name $env:MODULENAME -All | Remove-Module -Force -ErrorAction Ignore
+        Import-Module -Name "./$($env:MODULENAME)/$($env:MODULENAME).psd1" -Force -ErrorAction Stop
+        New-MarkdownHelp -Module $env:MODULENAME -OutputFolder $DocsPath | Out-Null
     - name: Create Documentation for Release
       uses: natescherer/markdown-to-html-with-github-style-action@v1.1.0
       with:
