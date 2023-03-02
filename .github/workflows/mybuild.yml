@@ -1,0 +1,39 @@
+﻿on:
+  # workflow_dispatch:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v1
+    # - name: Install Prerequisites
+    #   run: .\build\vsts-prerequisites.ps1
+    #   shell: pwsh
+    # - name: Validate
+    #   run: .\build\vsts-validate.ps1
+    #   shell: pwsh
+    - name: Install GitVersion
+      uses: gittools/actions/gitversion/setup@v0.9.15
+      with:
+        versionSpec: '5.x'
+    - name: Determine Version
+      id: gitversion
+      uses: gittools/actions/gitversion/execute@v0.9.15
+    - name: Install and cache PowerShell modules
+      id: psmodulecache
+      uses: potatoqualitee/psmodulecache@v5.2
+      with:
+        modules-to-cache: PSFramework, PSModuleDevelopment
+    - name: Show that the Action works
+      shell: pwsh
+      run: |
+          Get-Module -Name PSFramework, PSModuleDevelopment -ListAvailable | Select Path
+    # - name: Build
+    #   run: .\build\vsts-build.ps1 -ApiKey $env:APIKEY -Version ${{ steps.gitversion.outputs.SemVer }}
+    #   shell: pwsh
+    #   env:
+    #     APIKEY: ${{ secrets.ApiKey }}
