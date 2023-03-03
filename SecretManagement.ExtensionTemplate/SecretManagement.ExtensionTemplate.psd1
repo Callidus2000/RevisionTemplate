@@ -75,7 +75,7 @@ FunctionsToExport = 'Invoke-SMETemplate'
 CmdletsToExport = @()
 
 # Variables to export from this module
-# VariablesToExport = @()
+VariablesToExport = '*'
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = @()
@@ -107,11 +107,10 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '### Changed
- -Workflow shortened'
+        ReleaseNotes = '- Nothing More'
 
         # Prerelease string of this module
-        Prerelease = 'canBeKilled.1'
+        Prerelease = 'canBeKilled.2'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false
