@@ -12,7 +12,7 @@
 RootModule = 'SecretManagement.ExtensionTemplate.psm1'
 
 # Version number of this module.
-ModuleVersion = '0.2.0'
+ModuleVersion = '1.0.0'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -75,7 +75,7 @@ FunctionsToExport = 'Invoke-SMETemplate'
 CmdletsToExport = @()
 
 # Variables to export from this module
-VariablesToExport = @()
+# VariablesToExport = @()
 
 # Aliases to export from this module, for best performance, do not use wildcards and do not delete the entry, use an empty array if there are no aliases to export.
 AliasesToExport = @()
@@ -108,12 +108,10 @@ PrivateData = @{
 
         # ReleaseNotes of this module
         ReleaseNotes = '### Changed
-- CI Workflows are deactivated
-- Powershell Gallery push is disabled
-- added GitVersion.yml'
+ -Workflow shortened'
 
         # Prerelease string of this module
-        Prerelease = 'canBeKilled.2'
+        Prerelease = 'canBeKilled.1'
 
         # Flag to indicate whether the module requires explicit user acceptance for install/update/save
         # RequireLicenseAcceptance = $false
