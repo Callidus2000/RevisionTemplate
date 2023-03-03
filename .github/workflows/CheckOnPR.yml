@@ -44,12 +44,12 @@ jobs:
         modules-to-cache: ${{ steps.getReqModules.outputs.RequiredModules }},ChangelogManagement,platyPS
     - name: Validate
       run: .\build\vsts-validate.ps1
-    # - name: Update Changelog
-    #   id: changelog
-    #   uses: natescherer/changelog-management-action@v1
-    #   with:
-    #     mode: release
-    #     releaseVersion: ${{ steps.gitversion.outputs.SemVer }}
+    - name: Update Changelog
+      id: changelog
+      uses: natescherer/changelog-management-action@v1
+      with:
+        mode: release
+        releaseVersion: ${{ steps.gitversion.outputs.SemVer }}
     # - name: Update PowerShell Metadata
     #   uses: natescherer/update-powershell-metadata-action@v2
     #   with:
@@ -80,7 +80,8 @@ jobs:
     #       ## Changes
     #       ${{ steps.changelog.outputs.releasenotes }}
     - name: Setup tmate session
-      if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
+      # if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
+      if: ${{ (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
       uses: mxschmitt/action-tmate@v3
     # - name: Build
     #   run: .\build\vsts-build.ps1 -ApiKey $env:APIKEY -Version ${{ steps.gitversion.outputs.SemVer }}

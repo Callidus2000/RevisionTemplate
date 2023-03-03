@@ -8,7 +8,7 @@ If you don't care to deal with the details, this is what you need to do to get s
  - Update the `FunctionsToExport` node in the module manifest (SecretManagement.ExtensionTemplate.psd1). All functions you want to publish should be in a list.
  - Add internal helper functions the user should not see to `/internal/functions/`
  
- ## Path Warning
+ ## Path Warning is obsolet
  
  > If you want your module to be compatible with Linux and MacOS, keep in mind that those OS are case sensitive for paths and files.
  
