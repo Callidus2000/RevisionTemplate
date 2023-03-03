@@ -4,6 +4,12 @@
       - master
       # - canBeKilled
   workflow_dispatch:
+    inputs:
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
 env:
   MODULENAME: SecretManagement.ExtensionTemplate
 jobs:
@@ -131,7 +137,7 @@ jobs:
     #       Get-Content .\CHANGELOG.md
     #       #Get-Module -Name PSFramework, PSModuleDevelopment -ListAvailable | Select Path
     - name: Setup tmate session
-      if: ${{ failure() }}
+      if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
       uses: mxschmitt/action-tmate@v3
     # - name: Build
     #   run: .\build\vsts-build.ps1 -ApiKey $env:APIKEY -Version ${{ steps.gitversion.outputs.SemVer }}
