@@ -107,7 +107,10 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '- Nothing More'
+        ReleaseNotes = '### Changed
+ - Auto-Module-Name
+### Added
+ - ReleaseOnPRClose added'
 
         # Prerelease string of this module
         Prerelease = 'canBeKilled.2'
