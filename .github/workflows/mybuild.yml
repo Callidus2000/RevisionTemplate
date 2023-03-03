@@ -23,12 +23,6 @@ jobs:
     - uses: actions/checkout@v3
       with:
         fetch-depth: 0
-    # - name: Install Prerequisites
-    #   run: .\build\vsts-prerequisites.ps1
-    #   shell: pwsh
-    # - name: Validate
-    #   run: .\build\vsts-validate.ps1
-    #   shell: pwsh
     - name: Install GitVersion
       uses: gittools/actions/gitversion/setup@v0.9.15
       with:
@@ -47,11 +41,6 @@ jobs:
       uses: potatoqualitee/psmodulecache@v5.2
       with:
         modules-to-cache: ${{ steps.getReqModules.outputs.RequiredModules }},ChangelogManagement,platyPS
-    # - name: Install and cache PowerShell modules
-    #   id: psmodulecache
-    #   uses: potatoqualitee/psmodulecache@v5.2
-    #   with:
-    #     modules-to-cache: PSFramework, PSModuleDevelopment
     - name: Update Changelog
       id: changelog
       uses: natescherer/changelog-management-action@v1
@@ -67,38 +56,6 @@ jobs:
         releaseNotes: ${{ steps.changelog.outputs.releasenotes }}
         # functionsToExportPath: src\public
         description: ${{ steps.metadata.outputs.description }}
-    # - name: Generate Markdown Help Files
-    #   shell: pwsh
-    #   run: |
-    #     $DocsPath = Join-Path $env:GITHUB_WORKSPACE docs
-    #     if (Test-Path -Path $DocsPath) {
-    #       $CleanPath = Join-Path $DocsPath "*"
-    #       Remove-Item -Path $CleanPath
-    #     } else {
-    #       New-Item -Path $DocsPath -ItemType Directory | Out-Null
-    #     }
-    #     Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-    #     Install-Module -Name platyPS
-    #     Get-Module -Name $env:MODULENAME -All | Remove-Module -Force -ErrorAction Ignore
-    #     Import-Module -Name "./$($env:MODULENAME)/$($env:MODULENAME).psd1" -Force -ErrorAction Stop
-    #     New-MarkdownHelp -Module $env:MODULENAME -OutputFolder $DocsPath | Out-Null
-    # - name: Create Documentation for Release
-    #   uses: natescherer/markdown-to-html-with-github-style-action@v1.1.0
-    #   with:
-    #     path: README.md,CHANGELOG.md,docs
-    #     outputpath: out
-    #     matchpathstructure: true
-    # - name: Compress module for GitHub release
-    #   id: compress
-    #   run: |
-    #     $CopySourcePath = Join-Path $env:GITHUB_WORKSPACE "*"
-    #     $CopyDestPath = Join-Path $env:RUNNER_WORKSPACE "out"
-    #     mkdir $CopyDestPath -erroraction Continue
-    #     Copy-Item -Path $CopySourcePath -Destination $CopyDestPath -Recurse
-    #     $ZipSourcePath = Join-Path $CopyDestPath "*"
-    #     $ZipDestPath = Join-Path $env:GITHUB_WORKSPACE "out" "$env:BARE_REPOSITORY-v$env:GITVERSION_SEMVER.zip"
-    #     Compress-Archive -Path $ZipSourcePath -DestinationPath $ZipDestPath
-    #     "ZipPath=$ZipDestPath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
     - name: Push SemVer Tag
       uses: rickstaa/action-create-tag@v1
       with:
@@ -119,23 +76,6 @@ jobs:
 
           ## Changes
           ${{ steps.changelog.outputs.releasenotes }}
-    # - name: Create Release
-    #   uses: softprops/action-gh-release@v1
-    #   with:
-    #     name: v${{ steps.gitversion.outputs.SemVer }}
-    #     tag_name: v${{ steps.gitversion.outputs.SemVer }}
-    #     files: ${{ steps.compress.outputs.ZipPath }}
-    #     body: |
-    #       # Release v${{ steps.gitversion.outputs.SemVer }}
-    #       ${{ github.event.inputs.ReleaseHeader}}
-
-    #       ## Changes
-    #       ${{ steps.changelog.outputs.releasenotes }}
-    # - name: Show that the Action works
-    #   shell: pwsh
-    #   run: |
-    #       Get-Content .\CHANGELOG.md
-    #       #Get-Module -Name PSFramework, PSModuleDevelopment -ListAvailable | Select Path
     - name: Setup tmate session
       if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
       uses: mxschmitt/action-tmate@v3
