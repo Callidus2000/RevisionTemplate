@@ -15,6 +15,8 @@ jobs:
         shell: pwsh
     steps:
     - uses: actions/checkout@v3
+      with:
+        fetch-depth: 0
     # - name: Install Prerequisites
     #   run: .\build\vsts-prerequisites.ps1
     #   shell: pwsh
