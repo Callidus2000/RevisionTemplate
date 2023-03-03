@@ -10,6 +10,9 @@ jobs:
   myBuild:
 
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
     steps:
     - uses: actions/checkout@v1
     # - name: Install Prerequisites
@@ -57,6 +60,7 @@ jobs:
         # functionsToExportPath: src\public
         description: ${{ steps.metadata.outputs.description }}
     - name: Generate Markdown Help Files
+      shell: pwsh
       run: |
         $DocsPath = Join-Path $env:GITHUB_WORKSPACE docs
         if (Test-Path -Path $DocsPath) {
