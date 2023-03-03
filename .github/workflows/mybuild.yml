@@ -84,7 +84,8 @@ jobs:
       id: compress
       run: |
         $CopySourcePath = Join-Path $env:GITHUB_WORKSPACE "*"
-        $CopyDestPath = Join-Path $env:GITHUB_WORKSPACE ".." "out"
+        $CopyDestPath = Join-Path $env:RUNNER_WORKSPACE "out"
+        mkdir $CopyDestPath -erroraction Continue
         Copy-Item -Path $CopySourcePath -Destination $CopyDestPath -Recurse
         $ZipSourcePath = Join-Path $CopyDestPath "*"
         $ZipDestPath = Join-Path $env:GITHUB_WORKSPACE "out" "$env:BARE_REPOSITORY-v$env:GITVERSION_SEMVER.zip"
