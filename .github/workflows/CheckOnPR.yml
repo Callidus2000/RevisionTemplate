@@ -44,12 +44,12 @@ jobs:
         modules-to-cache: ${{ steps.getReqModules.outputs.RequiredModules }},ChangelogManagement,platyPS
     - name: Validate
       run: .\build\vsts-validate.ps1
-    # - name: Update Changelog
-    #   id: changelog
-    #   uses: natescherer/changelog-management-action@v1
-    #   with:
-    #     mode: release
-    #     releaseVersion: ${{ steps.gitversion.outputs.SemVer }}
+    - name: Update Changelog
+      id: changelog
+      uses: natescherer/changelog-management-action@v1
+      with:
+        mode: release
+        releaseVersion: ${{ steps.gitversion.outputs.SemVer }}
     # - name: Update PowerShell Metadata
     #   uses: natescherer/update-powershell-metadata-action@v2
     #   with:
