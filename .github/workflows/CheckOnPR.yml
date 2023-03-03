@@ -33,7 +33,6 @@ jobs:
         modules-to-cache: ${{ steps.getReqModules.outputs.RequiredModules }},ChangelogManagement,platyPS
     - name: Validate
       run: .\build\vsts-validate.ps1
-      shell: powershell
     # - name: Update Changelog
     #   id: changelog
     #   uses: natescherer/changelog-management-action@v1
