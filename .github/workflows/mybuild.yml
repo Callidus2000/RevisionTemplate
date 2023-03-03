@@ -80,17 +80,17 @@ jobs:
     #     path: README.md,CHANGELOG.md,docs
     #     outputpath: out
     #     matchpathstructure: true
-    - name: Compress module for GitHub release
-      id: compress
-      run: |
-        $CopySourcePath = Join-Path $env:GITHUB_WORKSPACE "*"
-        $CopyDestPath = Join-Path $env:RUNNER_WORKSPACE "out"
-        mkdir $CopyDestPath -erroraction Continue
-        Copy-Item -Path $CopySourcePath -Destination $CopyDestPath -Recurse
-        $ZipSourcePath = Join-Path $CopyDestPath "*"
-        $ZipDestPath = Join-Path $env:GITHUB_WORKSPACE "out" "$env:BARE_REPOSITORY-v$env:GITVERSION_SEMVER.zip"
-        Compress-Archive -Path $ZipSourcePath -DestinationPath $ZipDestPath
-        "ZipPath=$ZipDestPath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
+    # - name: Compress module for GitHub release
+    #   id: compress
+    #   run: |
+    #     $CopySourcePath = Join-Path $env:GITHUB_WORKSPACE "*"
+    #     $CopyDestPath = Join-Path $env:RUNNER_WORKSPACE "out"
+    #     mkdir $CopyDestPath -erroraction Continue
+    #     Copy-Item -Path $CopySourcePath -Destination $CopyDestPath -Recurse
+    #     $ZipSourcePath = Join-Path $CopyDestPath "*"
+    #     $ZipDestPath = Join-Path $env:GITHUB_WORKSPACE "out" "$env:BARE_REPOSITORY-v$env:GITVERSION_SEMVER.zip"
+    #     Compress-Archive -Path $ZipSourcePath -DestinationPath $ZipDestPath
+    #     "ZipPath=$ZipDestPath" | Out-File -FilePath $env:GITHUB_OUTPUT -Encoding utf8 -Append
     - name: Push SemVer Tag
       uses: rickstaa/action-create-tag@v1
       with:
@@ -105,13 +105,24 @@ jobs:
       with:
         name: v${{ steps.gitversion.outputs.SemVer }}
         tag_name: v${{ steps.gitversion.outputs.SemVer }}
-        files: ${{ steps.compress.outputs.ZipPath }}
         body: |
           # Release v${{ steps.gitversion.outputs.SemVer }}
           ${{ github.event.inputs.ReleaseHeader}}
 
           ## Changes
           ${{ steps.changelog.outputs.releasenotes }}
+    # - name: Create Release
+    #   uses: softprops/action-gh-release@v1
+    #   with:
+    #     name: v${{ steps.gitversion.outputs.SemVer }}
+    #     tag_name: v${{ steps.gitversion.outputs.SemVer }}
+    #     files: ${{ steps.compress.outputs.ZipPath }}
+    #     body: |
+    #       # Release v${{ steps.gitversion.outputs.SemVer }}
+    #       ${{ github.event.inputs.ReleaseHeader}}
+
+    #       ## Changes
+    #       ${{ steps.changelog.outputs.releasenotes }}
     # - name: Show that the Action works
     #   shell: pwsh
     #   run: |
