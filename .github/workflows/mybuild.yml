@@ -59,32 +59,32 @@ jobs:
         releaseNotes: ${{ steps.changelog.outputs.releasenotes }}
         # functionsToExportPath: src\public
         description: ${{ steps.metadata.outputs.description }}
-    - name: Generate Markdown Help Files
-      shell: pwsh
-      run: |
-        $DocsPath = Join-Path $env:GITHUB_WORKSPACE docs
-        if (Test-Path -Path $DocsPath) {
-          $CleanPath = Join-Path $DocsPath "*"
-          Remove-Item -Path $CleanPath
-        } else {
-          New-Item -Path $DocsPath -ItemType Directory | Out-Null
-        }
-        Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
-        Install-Module -Name platyPS
-        Get-Module -Name $env:MODULENAME -All | Remove-Module -Force -ErrorAction Ignore
-        Import-Module -Name "./$($env:MODULENAME)/$($env:MODULENAME).psd1" -Force -ErrorAction Stop
-        New-MarkdownHelp -Module $env:MODULENAME -OutputFolder $DocsPath | Out-Null
-    - name: Create Documentation for Release
-      uses: natescherer/markdown-to-html-with-github-style-action@v1.1.0
-      with:
-        path: README.md,CHANGELOG.md,docs
-        outputpath: out
-        matchpathstructure: true
+    # - name: Generate Markdown Help Files
+    #   shell: pwsh
+    #   run: |
+    #     $DocsPath = Join-Path $env:GITHUB_WORKSPACE docs
+    #     if (Test-Path -Path $DocsPath) {
+    #       $CleanPath = Join-Path $DocsPath "*"
+    #       Remove-Item -Path $CleanPath
+    #     } else {
+    #       New-Item -Path $DocsPath -ItemType Directory | Out-Null
+    #     }
+    #     Set-PSRepository -Name PSGallery -InstallationPolicy Trusted
+    #     Install-Module -Name platyPS
+    #     Get-Module -Name $env:MODULENAME -All | Remove-Module -Force -ErrorAction Ignore
+    #     Import-Module -Name "./$($env:MODULENAME)/$($env:MODULENAME).psd1" -Force -ErrorAction Stop
+    #     New-MarkdownHelp -Module $env:MODULENAME -OutputFolder $DocsPath | Out-Null
+    # - name: Create Documentation for Release
+    #   uses: natescherer/markdown-to-html-with-github-style-action@v1.1.0
+    #   with:
+    #     path: README.md,CHANGELOG.md,docs
+    #     outputpath: out
+    #     matchpathstructure: true
     - name: Compress module for GitHub release
       id: compress
       run: |
-        $CopySourcePath = Join-Path $env:GITHUB_WORKSPACE "src" "*"
-        $CopyDestPath = Join-Path $env:GITHUB_WORKSPACE "out"
+        $CopySourcePath = Join-Path $env:GITHUB_WORKSPACE "*"
+        $CopyDestPath = Join-Path $env:GITHUB_WORKSPACE ".." "out"
         Copy-Item -Path $CopySourcePath -Destination $CopyDestPath -Recurse
         $ZipSourcePath = Join-Path $CopyDestPath "*"
         $ZipDestPath = Join-Path $env:GITHUB_WORKSPACE "out" "$env:BARE_REPOSITORY-v$env:GITVERSION_SEMVER.zip"
