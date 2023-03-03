@@ -6,6 +6,20 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Changed
+ - Auto-Module-Name
+### Added
+ - ReleaseOnPRClose added
+## [1.0.0-canBeKilled.2] - 2023-03-03
+ - Nothing More
+## [1.0.0-canBeKilled.1] - 2023-03-03
+### Changed
+ -Workflow shortened
+
+## [0.2.0-canBeKilled.2] - 2023-03-03
+### Changed
 - CI Workflows are deactivated
 - Powershell Gallery push is disabled
-- added GitVersion.yml
+- added GitVersion.yml[Unreleased]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.0-canBeKilled.2..HEAD
+[1.0.0-canBeKilled.2]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.0-canBeKilled.1..v1.0.0-canBeKilled.2
+[1.0.0-canBeKilled.1]: https://github.com/Callidus2000/RevisionTemplate/compare/v0.2.0-canBeKilled.2..v1.0.0-canBeKilled.1
+[0.2.0-canBeKilled.2]: https://github.com/Callidus2000/RevisionTemplate/tree/v0.2.0-canBeKilled.2
