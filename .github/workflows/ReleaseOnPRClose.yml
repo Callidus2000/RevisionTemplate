@@ -3,7 +3,8 @@ on:
   pull_request:
     types: [closed]
     branches:
-      - 'master/**'
+      - master
+      - main
   workflow_dispatch:
     inputs:
       ReleaseHeader:
