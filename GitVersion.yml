@@ -29,7 +29,7 @@ branches:
   main:
     mode: ContinuousDelivery
     tag: ''
-    increment: None
+    increment: patch
     prevent-increment-of-merged-branch-version: true
     track-merge-target: false
     regex: ^master$|^main$
