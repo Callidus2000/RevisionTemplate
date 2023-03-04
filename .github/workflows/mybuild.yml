@@ -1,7 +1,7 @@
 ﻿on:
-  push:
-    branches:
-      - master
+  # push:
+  #   branches:
+  #     - master
       # - canBeKilled
   workflow_dispatch:
     inputs:
