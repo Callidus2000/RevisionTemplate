@@ -5,14 +5,14 @@ on:
     branches:
       - master
       - main
-  workflow_dispatch:
-    inputs:
-      ReleaseHeader:
-        description: The header to be added to the release.
-        required: false
+  # workflow_dispatch:
+  #   inputs:
+  #     ReleaseHeader:
+  #       description: The header to be added to the release.
+  #       required: false
 jobs:
   ReleaseOnPRClose:
-    # if: github.event.pull_request.merged == true
+    if: github.event.pull_request.merged == true
     runs-on: ubuntu-latest
     defaults:
       run:
