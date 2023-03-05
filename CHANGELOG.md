@@ -6,7 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 ### Added
- -  managedkaos/print-env
+ - Merge Back with vars
+ - managedkaos/print-env
 ## [1.0.2] - 2023-03-05
 
 ### Fixed
