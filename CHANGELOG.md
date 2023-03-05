@@ -6,6 +6,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ## [Unreleased]
 
+## [1.0.2] - 2023-03-05
+
 ### Fixed
  - Murks
 
@@ -29,7 +31,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - CI Workflows are deactivated
 - Powershell Gallery push is disabled
-- added GitVersion.yml[Unreleased]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.1..HEAD
+- added GitVersion.yml[Unreleased]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.2..HEAD
+[1.0.2]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.1..v1.0.2
 [1.0.1]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.0..v1.0.1
 [1.0.0]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.0-canBeKilled.2..v1.0.0
 [1.0.0-canBeKilled.2]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.0-canBeKilled.1..v1.0.0-canBeKilled.2
