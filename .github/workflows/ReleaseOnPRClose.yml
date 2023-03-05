@@ -5,11 +5,11 @@ on:
     branches:
       - master
       - main
-  # workflow_dispatch:
-  #   inputs:
-  #     ReleaseHeader:
-  #       description: The header to be added to the release.
-  #       required: false
+  workflow_dispatch:
+    inputs:
+      ReleaseHeader:
+        description: The header to be added to the release.
+        required: false
 jobs:
   ReleaseOnPRClose:
     if: github.event.pull_request.merged == true
@@ -90,7 +90,7 @@ jobs:
         from_branch: ${{ $GITHUB_ACTION_REF }}
         target_branch: ${{ $GITHUB_HEAD_REF }}
         github_token: ${{ github.token }}
-        
+
     # - name: Merge master back to dev
     #   run: |
     #       git fetch --unshallow
