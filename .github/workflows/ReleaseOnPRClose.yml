@@ -95,16 +95,26 @@ jobs:
     - name: Merge master back to dev
       run: |
           git fetch --unshallow
-          git checkout development
+          git checkout ${{ env.GITHUB_ACTION_REF }}
           git pull
-          git checkout master
+          git checkout ${{ env.GITVERSION_BRANCHNAME }}
           git pull
-          # git merge --no-ff master -m "Auto-merge master back to dev"
-          git merge --no-ff development -m "Auto-merge master and dev"
+          # git merge --no-ff ${{ env.GITVERSION_BRANCHNAME }} -m "Auto-merge master back to dev"
+          git merge --no-ff ${{ env.GITHUB_ACTION_REF }} -m "Auto-merge ${{ env.GITVERSION_BRANCHNAME }} to ${{ env.GITHUB_ACTION_REF }}"
           git push
-    - name: Setup tmate session
-      if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
-      uses: mxschmitt/action-tmate@v3
+    # - name: Merge master back to dev
+    #   run: |
+    #       git fetch --unshallow
+    #       git checkout development
+    #       git pull
+    #       git checkout master
+    #       git pull
+    #       # git merge --no-ff master -m "Auto-merge master back to dev"
+    #       git merge --no-ff development -m "Auto-merge master and dev"
+    #       git push
+    # - name: Setup tmate session
+    #   if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
+    #   uses: mxschmitt/action-tmate@v3
     # - name: Build
     #   run: .\build\vsts-build.ps1 -ApiKey $env:APIKEY -Version ${{ steps.gitversion.outputs.SemVer }}
     #   shell: pwsh
