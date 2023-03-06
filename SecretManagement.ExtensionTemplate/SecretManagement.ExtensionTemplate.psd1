@@ -12,7 +12,7 @@
 RootModule = 'SecretManagement.ExtensionTemplate.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.13'
+ModuleVersion = '1.0.14'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -108,7 +108,7 @@ PrivateData = @{
 
         # ReleaseNotes of this module
         ReleaseNotes = '### Changed
- - Switched to github context'
+ - Back to devmasx/merge-branch@master'
 
         # Prerelease string of this module
         Prerelease = 'canBeKilled.2'
