@@ -12,7 +12,7 @@
 RootModule = 'SecretManagement.ExtensionTemplate.psm1'
 
 # Version number of this module.
-ModuleVersion = '1.0.3'
+ModuleVersion = '1.0.4'
 
 # Supported PSEditions
 # CompatiblePSEditions = @()
@@ -107,9 +107,8 @@ PrivateData = @{
         # IconUri = ''
 
         # ReleaseNotes of this module
-        ReleaseNotes = '### Added
- - Merge Back with vars
- - managedkaos/print-env'
+        ReleaseNotes = '### Changed
+ - MergeBack removed'
 
         # Prerelease string of this module
         Prerelease = 'canBeKilled.2'
