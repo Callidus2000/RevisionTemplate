@@ -83,22 +83,25 @@ jobs:
 
           ## Changes
           ${{ steps.changelog.outputs.releasenotes }}
-    - name: Merge master back to source branch
-      uses: devmasx/merge-branch@master
-      with:
-        type: now
-        # from_branch: ${{ env.GITHUB_ACTION_REF }}
-        # target_branch: master
-        target_branch: ${{ env.GITVERSION_BRANCHNAME }}
-        github_token: ${{ github.token }}
+    # - name: Merge master back to source branch
+    #   uses: devmasx/merge-branch@master
+    #   with:
+    #     type: now
+    #     # from_branch: ${{ env.GITHUB_ACTION_REF }}
+    #     # target_branch: master
+    #     target_branch: ${{ env.GITVERSION_BRANCHNAME }}
+    #     github_token: ${{ github.token }}
 
-    # - name: Merge master back to dev
-    #   run: |
-    #       git fetch --unshallow
-    #       git checkout development
-    #       git pull
-    #       git merge --no-ff master -m "Auto-merge master back to dev"
-    #       git push
+    - name: Merge master back to dev
+      run: |
+          git fetch --unshallow
+          git checkout development
+          git pull
+          git checkout master
+          git pull
+          # git merge --no-ff master -m "Auto-merge master back to dev"
+          git merge --no-ff development -m "Auto-merge master and dev"
+          git push
     - name: Setup tmate session
       if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
       uses: mxschmitt/action-tmate@v3
