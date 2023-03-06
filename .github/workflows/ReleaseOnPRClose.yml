@@ -98,12 +98,11 @@ jobs:
     - name: Merge master back to dev
       run: |
           git fetch --unshallow
-          git checkout ${{ env.GITHUB_ACTION_REF }}
+          git checkout ${{ github.head_ref	 }}
           git pull
-          git checkout ${{ env.GITVERSION_BRANCHNAME }}
+          git checkout ${{ github.base_ref }}
           git pull
-          # git merge --no-ff ${{ env.GITVERSION_BRANCHNAME }} -m "Auto-merge master back to dev"
-          git merge --no-ff ${{ env.GITHUB_ACTION_REF }} -m "Auto-merge ${{ env.GITVERSION_BRANCHNAME }} to ${{ env.GITHUB_ACTION_REF }}"
+          git merge --no-ff ${{ github.head_ref	 }} -m "Auto-merge ${{ github.base_ref }} to ${{ github.head_ref	 }}"
           git push
     # - name: Merge master back to dev
     #   run: |
