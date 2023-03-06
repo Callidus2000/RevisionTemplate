@@ -86,33 +86,23 @@ jobs:
 
           ## Changes
           ${{ steps.changelog.outputs.releasenotes }}
-    # - name: Merge master back to source branch
-    #   uses: devmasx/merge-branch@master
-    #   with:
-    #     type: now
-    #     # from_branch: ${{ env.GITHUB_ACTION_REF }}
-    #     # target_branch: master
-    #     target_branch: ${{ env.GITVERSION_BRANCHNAME }}
-    #     github_token: ${{ github.token }}
+    - name: Merge master back to source branch
+      uses: devmasx/merge-branch@master
+      with:
+        type: now
+        from_branch: ${{ github.head_ref }}
+        # target_branch: master
+        target_branch: ${{ github.base_ref }}
+        github_token: ${{ github.token }}
 
-    - name: Merge master back to dev
-      run: |
-          git fetch --unshallow
-          git checkout ${{ github.head_ref	 }}
-          git pull
-          git checkout ${{ github.base_ref }}
-          git pull
-          git merge --no-ff ${{ github.head_ref	 }} -m "Auto-merge ${{ github.base_ref }} to ${{ github.head_ref	 }}"
-          git push
     # - name: Merge master back to dev
     #   run: |
     #       git fetch --unshallow
-    #       git checkout development
+    #       git checkout ${{ github.head_ref	 }}
     #       git pull
-    #       git checkout master
+    #       git checkout ${{ github.base_ref }}
     #       git pull
-    #       # git merge --no-ff master -m "Auto-merge master back to dev"
-    #       git merge --no-ff development -m "Auto-merge master and dev"
+    #       git merge --no-ff ${{ github.head_ref	 }} -m "Auto-merge ${{ github.base_ref }} to ${{ github.head_ref	 }}"
     #       git push
     # - name: Setup tmate session
     #   if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
