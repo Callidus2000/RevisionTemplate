@@ -5,6 +5,8 @@ The format is based on [Keep a Changelog](https://keepachangelog.com/en/1.0.0/),
 and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0.html).
 
 ## [Unreleased]
+
+## [1.0.14] - 2023-03-06
 ### Changed
  - Back to devmasx/merge-branch@master
 
@@ -61,7 +63,8 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Changed
 - CI Workflows are deactivated
 - Powershell Gallery push is disabled
-- added GitVersion.yml[Unreleased]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.13..HEAD
+- added GitVersion.yml[Unreleased]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.14..HEAD
+[1.0.14]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.13..v1.0.14
 [1.0.13]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.12..v1.0.13
 [1.0.12]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.8..v1.0.12
 [1.0.8]: https://github.com/Callidus2000/RevisionTemplate/compare/v1.0.7..v1.0.8
