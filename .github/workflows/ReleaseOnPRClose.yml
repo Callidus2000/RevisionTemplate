@@ -87,8 +87,8 @@ jobs:
       uses: devmasx/merge-branch@master
       with:
         type: now
-        from_branch: ${{ $GITHUB_ACTION_REF }}
-        target_branch: ${{ $GITHUB_HEAD_REF }}
+        from_branch: ${{ env.GITHUB_ACTION_REF }}
+        target_branch: ${{ env.GITHUB_HEAD_REF }}
         github_token: ${{ github.token }}
 
     # - name: Merge master back to dev
