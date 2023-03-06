@@ -1,0 +1,32 @@
+name: StartMeManually
+on:
+  workflow_dispatch:
+    inputs:
+      ReleaseHeader:
+        description: The header to be added to the release.
+        required: false
+      debug_enabled:
+        type: boolean
+        description: 'Run the build with tmate debugging enabled (https://github.com/marketplace/actions/debugging-with-tmate)'
+        required: false
+        default: false
+jobs:
+  TestIt:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        shell: pwsh
+    steps:
+      - name: Print Environment
+        uses: managedkaos/print-env@master
+      - name: Checkout
+        uses: actions/checkout@v3
+        with:
+          fetch-depth: 0
+      - name: Merge master back to source branch
+        uses: devmasx/merge-branch@master
+        with:
+          type: now
+          from_branch: $GITHUB_ACTION_REF
+          target_branch: ${{ env.GITHUB_HEAD_REF }}
+          github_token: ${{ github.token }}
