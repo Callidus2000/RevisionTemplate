@@ -89,7 +89,7 @@ jobs:
         type: now
         # from_branch: ${{ env.GITHUB_ACTION_REF }}
         # target_branch: master
-        target_branch: $GITHUB_ACTION_REF
+        target_branch: $GITVERSION_BRANCHNAME
         github_token: ${{ github.token }}
 
     # - name: Merge master back to dev
