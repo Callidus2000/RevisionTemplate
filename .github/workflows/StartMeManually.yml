@@ -36,4 +36,5 @@ jobs:
       - name: Determine Version
         id: gitversion
         uses: gittools/actions/gitversion/execute@v0.9.15
-        next-version: 2.0.0
+        with:
+          next_version: 2.0.0
