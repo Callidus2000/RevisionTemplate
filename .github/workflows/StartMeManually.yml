@@ -36,8 +36,8 @@ jobs:
       - name: Determine Version
         id: gitversion
         uses: gittools/actions/gitversion/execute@v0.9.15
-        # with:
-        #   additionalArguments: /overrideconfig next-version=1.0.0
+        with:
+          additionalArguments: /overrideconfig next-version=${{env.PSD_MODULEVERSION}}
       # - name: Setup tmate session
       #   if: ${{ failure() || (github.event_name == 'workflow_dispatch' && inputs.debug_enabled ) }}
       #   uses: mxschmitt/action-tmate@v3

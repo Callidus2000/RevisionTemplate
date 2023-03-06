@@ -1,4 +1,4 @@
-﻿next-version: {env:PSD_MODULEVERSION}
+﻿# next-version: {env:PSD_MODULEVERSION}
 assembly-versioning-scheme: MajorMinorPatch
 assembly-file-versioning-scheme: MajorMinorPatch
 mode: ContinuousDelivery
