@@ -76,13 +76,13 @@ jobs:
       uses: rickstaa/action-create-tag@v1
       with:
         tag: v${{ steps.gitversion.outputs.SemVer }}
-    - name: Commit Changes to Repo (Source Branch)
+    - name: Commit Changes to Repo (Source Branch of development)
       uses: stefanzweifel/git-auto-commit-action@v4
       with:
         commit_message: Release v${{ steps.gitversion.outputs.SemVer }}
         file_pattern: ":!test\\* :!test/*"
         # skip_checkout: true
-    - name: Merge master back to source branch
+    - name: Perform Merge development to master (${{ github.head_ref }}>${{ github.base_ref }})
       uses: devmasx/merge-branch@master
       with:
         type: now
@@ -101,14 +101,6 @@ jobs:
 
           ## Changes
           ${{ steps.changelog.outputs.releasenotes }}
-    - name: Merge master back to source branch
-      uses: devmasx/merge-branch@master
-      with:
-        type: now
-        from_branch: ${{ github.head_ref }}
-        # target_branch: master
-        target_branch: ${{ github.base_ref }}
-        github_token: ${{ github.token }}
     - name: Build and publish
       env:
         APIKEY: ${{ secrets.ApiKey }}
