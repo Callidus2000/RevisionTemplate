@@ -62,7 +62,7 @@ jobs:
       run: |
         $updateParam=@{
           path= (Join-Path (Get-Location).path "${{ env.MODULENAME }}" "${{ env.MODULENAME }}.psd1")
-          moduleVersion="${{ steps.gitversion.outputs.SemVer }}"
+          moduleVersion="${{ steps.gitversion.outputs.MajorMinorPatch }}"
           copyright="(c) $(Get-Date -Format 'yyyy') Sascha Spiekermann"
           releaseNotes= "${{ steps.changelog.outputs.releasenotes }}"
           # functionsToExportPath: src\public
