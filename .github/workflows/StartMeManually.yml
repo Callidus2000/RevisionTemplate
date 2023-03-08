@@ -19,12 +19,12 @@ jobs:
     steps:
       - name: Print Environment
         uses: managedkaos/print-env@master
-      - name: "check is MY_SECRET exists"
+      - name: check is MY_SECRET exists
         env: 
             APIKEY: ${{ secrets.ApiKey }}
         if: ${{ env.APIKEY == '' }}
         run: 'echo "echo the secret \"APIKEY\" has not been made; echo please go to \"settings \> secrets \> actions\" to create it"
-      - name: "check is MY_SECRET exists"
+      - name: check is MY_SECRET exists
         env: 
             APIKEY: ${{ secrets.ApiKey }}
         if: ${{ env.APIKEY != '' }}
