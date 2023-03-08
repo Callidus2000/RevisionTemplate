@@ -59,14 +59,19 @@ jobs:
         mode: release
         releaseVersion: ${{ steps.gitversion.outputs.SemVer }}
     - name: Update PowerShell Metadata
-      uses: natescherer/update-powershell-metadata-action@v2
-      with:
-        path: ${{ env.MODULENAME }}
-        version: ${{ steps.gitversion.outputs.SemVer }}
-        copyright: (c) YYYY Sascha Spiekermann. All rights reserved.
-        releaseNotes: ${{ steps.changelog.outputs.releasenotes }}
-        # functionsToExportPath: src\public
-        description: ${{ steps.metadata.outputs.description }}
+      run: |
+        $updateParam=@{
+          path= (Join-Path (Get-Location).path "${{ env.MODULENAME }}" "${{ env.MODULENAME }}.psd1")
+          moduleVersion="${{ steps.gitversion.outputs.SemVer }}"
+          copyright="(c) $(Get-Date -Format 'yyyy') Sascha Spiekermann"
+          releaseNotes= "${{ steps.changelog.outputs.releasenotes }}"
+          # functionsToExportPath: src\public
+          description= "${{ steps.metadata.outputs.description }}"
+        }
+        @($updateParam.keys) | Foreach-Object { 
+          if (-not $updateParam[$_]) { $updateParam.Remove($_) } 
+        }
+        Update-ModuleManifest @updateParam
     - name: Push SemVer Tag
       uses: rickstaa/action-create-tag@v1
       with:
